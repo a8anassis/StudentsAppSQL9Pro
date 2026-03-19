@@ -57,26 +57,89 @@ namespace StudentsAppSQL9Pro.DAO
             return studentToReturn;
         }
 
-        public void Delete(int id)
+        public void Update(Student student)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE Students SET Firstname = @firstname, Lastname = @lastname WHERE Id = @id";
+
+            using SqlConnection connection = _db.GetConnection();
+            connection.Open();
+
+            using SqlCommand sqlCommand = new(sql, connection);
+            sqlCommand.Parameters.AddWithValue("@firstname", student.Firstname);
+            sqlCommand.Parameters.AddWithValue("@lastname", student.Lastname);
+            sqlCommand.Parameters.AddWithValue("@id", student.Id);
+
+            sqlCommand.ExecuteNonQuery();
         }
 
-        public List<Student> GetAll()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM Students WHERE Id = @id";
+
+            using SqlConnection connection = _db.GetConnection();
+            connection.Open();
+
+            using SqlCommand sqlCommand = new(sql, connection);
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.ExecuteNonQuery();
         }
 
         public Student? GetById(int id)
         {
-            throw new NotImplementedException();
+            Student studentToReturn = null;
+            string sql = "SELECT * FROM Students WHERE Id = @id";
+
+            using SqlConnection connection = _db.GetConnection();
+            connection.Open();
+
+            using SqlCommand sqlCommand = new(sql, connection);
+            sqlCommand.Parameters.AddWithValue("@id", id);
+
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            if (reader.Read())
+            {
+                studentToReturn = new Student()
+                {
+                    Id = (int)reader["Id"],
+                    Firstname = reader["Firstname"] as string ?? "",
+                    Lastname = reader["Lastname"] as string ?? ""
+                };
+            }
+
+            return studentToReturn;
+        }
+
+        public List<Student> GetAll()
+        {
+            List<Student> students = [];
+            string sql = "SELECT * FROM Students";
+
+            using SqlConnection connection = _db.GetConnection();
+            connection.Open();
+
+            using SqlCommand sqlCommand = new(sql, connection);
+
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Student student = new Student()
+                {
+                    Id = (int)reader["Id"],
+                    Firstname = reader["Firstname"] as string ?? "",
+                    Lastname = reader["Lastname"] as string ?? ""
+                };
+
+                students.Add(student);
+            }
+            return students;
         }
 
         
 
-        public void Update(Student student)
-        {
-            throw new NotImplementedException();
-        }
+        
+
+        
     }
 }
