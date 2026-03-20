@@ -20,7 +20,7 @@ namespace StudentsAppSQL9Pro.Services
             _logger = logger;
         }
 
-        public StudentReadOnlyDTO? InsertStudent(StudentReadOnlyDTO studentInsertDTO)
+        public StudentReadOnlyDTO? InsertStudent(StudentInsertDTO studentInsertDTO)
         {
             StudentReadOnlyDTO studentReadOnlyDTO;
 
