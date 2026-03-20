@@ -86,7 +86,7 @@ namespace StudentsAppSQL9Pro.DAO
 
         public Student? GetById(int id)
         {
-            Student studentToReturn = null;
+            Student studentToReturn = null!;
             string sql = "SELECT * FROM Students WHERE Id = @id";
 
             using SqlConnection connection = _db.GetConnection();
@@ -135,11 +135,5 @@ namespace StudentsAppSQL9Pro.DAO
             }
             return students;
         }
-
-        
-
-        
-
-        
     }
 }
