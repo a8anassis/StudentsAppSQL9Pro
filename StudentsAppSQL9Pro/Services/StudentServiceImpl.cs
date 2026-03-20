@@ -36,8 +36,9 @@ namespace StudentsAppSQL9Pro.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError("Student insertion failed for {Firstname} {Lastname}",
-                    studentInsertDTO.Firstname, studentInsertDTO.Lastname);
+                _logger.LogError("Student insertion failed for {Firstname} {Lastname}. {Errormessage}",
+                    studentInsertDTO.Firstname, studentInsertDTO.Lastname, ex.Message);
+                throw;
             }
         }
 
