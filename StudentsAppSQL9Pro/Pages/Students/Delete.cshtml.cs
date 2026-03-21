@@ -23,9 +23,7 @@ namespace StudentsAppSQL9Pro.Pages.Students
                 studentService.DeleteStudent(id);
                 TempData["StudentName"] = $"Student with id {id} was successfully deleted.";
 
-
                 return RedirectToPage("/Students/Success");
-                //Response.Redirect("/Students/getall");
             }
             catch (Exception ex)
             {
