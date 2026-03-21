@@ -13,7 +13,8 @@ namespace StudentsAppSQL9Pro.Services
         private readonly IMapper _mapper;
         private readonly ILogger<StudentServiceImpl> _logger;
 
-        public StudentServiceImpl(IStudentDAO studentDAO, IMapper mapper, ILogger<StudentServiceImpl> logger)
+        public StudentServiceImpl(IStudentDAO studentDAO, IMapper mapper, 
+            ILogger<StudentServiceImpl> logger)
         {
             _studentDAO = studentDAO;
             _mapper = mapper;
@@ -134,11 +135,5 @@ namespace StudentsAppSQL9Pro.Services
                 throw;
             }
         }
-
-        
-
-        
-
-        
     }
 }
